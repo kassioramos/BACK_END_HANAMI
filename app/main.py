@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.api.upload import router as upload_router
+from app.api.relatorios import router as relatorios_router
 from app.core.logger import configurar_logger
 import logging
 
@@ -13,6 +14,7 @@ app = FastAPI(
 )
 
 app.include_router(upload_router)
+app.include_router(relatorios_router)
 
 @app.get("/")
 def home():
