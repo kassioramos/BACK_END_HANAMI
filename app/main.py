@@ -1,5 +1,10 @@
 from fastapi import FastAPI
 from app.api.upload import router as upload_router
+from app.core.logger import configurar_logger
+import logging
+
+configurar_logger()
+logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="Hanami Backend",
@@ -11,6 +16,7 @@ app.include_router(upload_router)
 
 @app.get("/")
 def home():
+    logger.info("Endpoint / acessado")
     return {
         "status": "ok",
         "mensagem": "Hanami Backend rodando"

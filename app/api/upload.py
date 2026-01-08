@@ -1,7 +1,9 @@
 import os
+import logging
 from fastapi import APIRouter, UploadFile, File
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 
 UPLOAD_DIR = "app/uploads"
 
@@ -15,6 +17,8 @@ async def upload_arquivo(file: UploadFile = File(...)):
     with open(caminho_arquivo, "wb") as f:
         conteudo = await file.read()
         f.write(conteudo)
+
+    logger.info(f"Arquivo enviado: {file.filename}")
 
     return {
         "status": "arquivo salvo com sucesso",
