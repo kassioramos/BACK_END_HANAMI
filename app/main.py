@@ -1,25 +1,21 @@
 from fastapi import FastAPI
-from app.api.upload import router as upload_router
-from app.api.relatorios import router as relatorios_router
-from app.core.logger import configurar_logger
-import logging
 
-configurar_logger()
-logger = logging.getLogger(__name__)
+from app.api.products import router as products_router
+from app.api.sales import router as sales_router
 
 app = FastAPI(
-    title="Hanami Backend",
-    description="API para upload e análise inicial de dados",
-    version="0.1.0"
+    title="Kanban Backend",
+    version="1.0.0",
+    description="Backend do projeto Kanban – Sprint 1"
 )
 
-app.include_router(upload_router)
-app.include_router(relatorios_router)
+# Registro dos endpoints
+app.include_router(products_router)
+app.include_router(sales_router)
 
 @app.get("/")
-def home():
-    logger.info("Endpoint / acessado")
+def health_check():
     return {
         "status": "ok",
-        "mensagem": "Hanami Backend rodando"
+        "message": "API Kanban Backend rodando corretamente"
     }

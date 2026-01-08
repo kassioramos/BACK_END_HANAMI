@@ -2,11 +2,11 @@ import os
 from fastapi import APIRouter, HTTPException
 from app.core.parser import analisar_arquivo
 
-router = APIRouter()
+router = APIRouter(prefix="/api/relatorios", tags=["Relatórios"])
 
 ARQUIVO_CONTROLE = "app/storage/ultimo_arquivo.txt"
 
-@router.get("/relatorios/arquivo-atual")
+@router.get("/arquivo-atual")
 def relatorio_arquivo_atual():
     if not os.path.exists(ARQUIVO_CONTROLE):
         raise HTTPException(
